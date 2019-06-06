@@ -7,11 +7,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # anything going to '/' should be redirected to the urls of imageupload_frontend
-    url(r'^', include('imageupload_frontend.urls', namespace='frontend')),
+    url(r'^', include(('imageupload_frontend.urls','django_rest_imageupload_backend'), namespace='frontend')),
     # anything going to /admin gets redirected to the admin stuff (makes sense...)
     url(r'^admin/', admin.site.urls),
     # anything going to /api gets redirected to the django rest API stuff
-    url(r'^api/', include('imageupload_rest.urls', namespace='api')),
+    url(r'^api/', include(('imageupload_rest.urls','django_rest_imageupload_backend'), namespace='api')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # we are serving static and media files here at the moment - if we deploy this app to a server, we do necessarily want this
 
